@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<FileDownLoad version="1" >
+  <FileList>
+    <File md5="0000000000000000000000000000000" name="file1.exe" url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+    <File md5="0000000000000000000000000000000" name="file2.exe"  url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+    <File md5="0000000000000000000000000000000" name="file3.exe"  url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+    <File md5="0000000000000000000000000000000" name="file4.exe"  url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+    <File md5="0000000000000000000000000000000" name="file5.exe"  url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+    <File md5="0000000000000000000000000000000" name="file6.exe"  url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+    <File md5="0000000000000000000000000000000" name="file7.exe"  url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+    <File md5="0000000000000000000000000000000" name="file8.exe"  url="http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe" description="test"/>
+  </FileList>
+</FileDownLoad>
