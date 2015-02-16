@@ -14,6 +14,7 @@ Thumbs.db
 *_p.c
 *.ncb
 *.suo
+*.opensdf
 *.tlb
 *.tlh
 *.bak
@@ -28,5 +29,5 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-boost/*
-stage/
+include/boost/*
+lib/stage/
