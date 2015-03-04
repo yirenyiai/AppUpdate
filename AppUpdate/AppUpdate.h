@@ -21,7 +21,7 @@ public:
 	AppUpdate(boost::asio::io_service& IOService, boost::filesystem::path Path);
 	~AppUpdate();
 	// 开始升级
-	void StartUpdate(const std::string& Url, avhttp::proxy_settings avHttpProxy = avhttp::proxy_settings());
+	void StartUpdate(const std::string& Url, const std::string& FileMD5, avhttp::proxy_settings avHttpProxy = avhttp::proxy_settings());
 	// 暂停升级
 	void PauseUpdate();
 	// 继续升级
@@ -29,9 +29,10 @@ public:
 private:
 	void HandleOpen(const boost::system::error_code &ec);
 	void HandleRead(int BytesTransferred, const boost::system::error_code &ec);
+	bool MD5Check(const std::string& FileMD5);
 private:
 	boost::array<char, 2048>    m_RecvBytes;
-	boost::iostreams::file_sink m_FileSink;
+	boost::shared_ptr<boost::iostreams::file_sink> m_FileSink;
 	avhttp::http_stream			m_AvHttpStream;
 	boost::filesystem::path 	m_FilePath;
 	bool						m_bPause;

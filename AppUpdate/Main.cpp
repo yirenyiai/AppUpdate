@@ -33,8 +33,6 @@
 *　　　　　　　　　　┗┻┛　┗┻┛+ + + +
 */
 
-
-
 void OnFileDownLoadComplete(bool bResult, const boost::filesystem::path& FilePath, boost::shared_ptr<AppFileHandle> pAppFileHandle)
 {
 	printf("文件 : %s 下载完毕\n", FilePath.string().c_str());
@@ -76,7 +74,7 @@ int main(int argc,char* argv[])
 			boost::filesystem::path FilePath = pAppFileHandle->BackUpDirPath() / File.m_FileName;
 			boost::shared_ptr<AppUpdate> pAppUpdate(new AppUpdate(io, FilePath));
 			pAppUpdate->m_UpdateCompleteSig.connect(boost::bind(OnFileDownLoadComplete, _1, _2, pAppFileHandle));
-			pAppUpdate->StartUpdate(File.m_Url);
+			pAppUpdate->StartUpdate(File.m_Url, File.m_MD5);
 		});
 	});
 
