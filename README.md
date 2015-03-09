@@ -1,7 +1,7 @@
 # AppUpdate
 ##1： 外部依赖
-  1> boost 库， 当前开发采用的是1.55版本
-  2> avhttp 库，感谢jack的开源。该库的地址是: https://github.com/avplayer/avhttp
+  ###1> boost 库， 当前开发采用的是1.55版本<br\>
+  ###2> avhttp 库，感谢jack的开源。该库的地址是: https://github.com/avplayer/avhttp<br\>
   3> zlib 库， 本库已经也已经集成在项目中。通过编译就可以了。本项目采用的是 1.2.5 版本
 ##2： 下载的配置文件字段说明
   1> name : 下载后文件保存的名字
