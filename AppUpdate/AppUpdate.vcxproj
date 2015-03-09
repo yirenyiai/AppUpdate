@@ -62,7 +62,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib\stage\lib;..\lib\zlib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\boost\;..\lib\zlib\</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlib125_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -84,7 +84,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\lib\stage\lib;..\lib\zlib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\boost\;..\lib\zlib\</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlib125.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
