@@ -17,4 +17,7 @@
   bin\ ： 项目生成的 exe 输出地方<br\>
   lib\boost : boost 的所有lib文件<br\>
   lib\zlib : zlib项目编译生成的lib<br\>
+##4：压缩文件格式
+  目前支持的有 gz 和 zlib <br\>
+  
   
