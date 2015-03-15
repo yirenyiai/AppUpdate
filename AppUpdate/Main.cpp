@@ -35,20 +35,18 @@
 
 void OnFileDownLoadComplete(bool bResult, const boost::filesystem::path& FilePath, boost::shared_ptr<AppFileHandle> pAppFileHandle)
 {
-	printf("文件 : %s 下载完毕\n", FilePath.string().c_str());
-	boost::filesystem::path DestPath = boost::filesystem::current_path() / FilePath.filename();
+	boost::filesystem::path DestPath = pAppFileHandle->GetCurrentPath() / FilePath.filename();
 	if (pAppFileHandle->Copy(FilePath, DestPath))
 	{
-		std::cout << FilePath.filename() << "文件处理完毕" << std::endl;
 		std::string ext = boost::filesystem::extension(FilePath);
 		if (std::string(".zip") ==  ext)
 		{
-			do_extract_zip(FilePath.string().c_str(), ".\\");
+			boost::filesystem::path p = DestPath.parent_path();
+			do_extract_zip(FilePath.string().c_str(), p.string().c_str());
 		}
 		else if (std::string(".gz") == ext)
 		{
 			do_extract_gz(FilePath.string().c_str());
-
 		}
 	}
 }

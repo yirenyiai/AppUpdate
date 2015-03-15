@@ -3,6 +3,8 @@
 AppFileHandle::AppFileHandle(const std::string& FilePath, const std::string& BackUpDirName)
 	:m_BackUpDirPath(FilePath)
 {
+	m_CurrentPath = boost::filesystem::system_complete(m_BackUpDirPath.remove_filename());
+	m_CurrentPath += ".\\";
 	m_BackUpDirPath = boost::filesystem::system_complete(m_BackUpDirPath.remove_filename()) / BackUpDirName;
     // 创建这个备份文件夹
     boost::filesystem::create_directory(m_BackUpDirPath);
@@ -16,6 +18,11 @@ AppFileHandle::~AppFileHandle()
 const boost::filesystem::path& AppFileHandle::BackUpDirPath()
 {
     return m_BackUpDirPath;
+}
+
+const boost::filesystem::path& AppFileHandle::GetCurrentPath()
+{
+	return m_CurrentPath;
 }
 
 // 当文件下载完毕，对文件进行处理
