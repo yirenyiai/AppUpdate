@@ -16,7 +16,8 @@ class AppUpdate
 	: public boost::enable_shared_from_this<AppUpdate>
 {
 public:
-	boost::signals2::signal<void(bool, const boost::filesystem::path&)> m_UpdateCompleteSig;
+	boost::signals2::signal<void(const float&)> m_UpdateProgressSig;
+	boost::signals2::signal<void(bool, const boost::filesystem::path&, boost::shared_ptr<AppUpdate>)> m_UpdateCompleteSig;
 public:
 	AppUpdate(boost::asio::io_service& IOService, boost::filesystem::path Path);
 	~AppUpdate();
@@ -35,6 +36,8 @@ private:
 	boost::shared_ptr<boost::iostreams::file_sink> m_FileSink;
 	avhttp::http_stream			m_AvHttpStream;
 	boost::filesystem::path 	m_FilePath;
+	std::string					m_DownLoadUrl;
 	bool						m_bPause;
 	int							m_TotalSize;
+	int							m_ServerFileLen;
 };

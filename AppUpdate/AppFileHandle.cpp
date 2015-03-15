@@ -4,7 +4,6 @@ AppFileHandle::AppFileHandle(const std::string& FilePath, const std::string& Bac
 	:m_BackUpDirPath(FilePath)
 {
 	m_CurrentPath = boost::filesystem::system_complete(m_BackUpDirPath.remove_filename());
-	m_CurrentPath += ".\\";
 	m_BackUpDirPath = boost::filesystem::system_complete(m_BackUpDirPath.remove_filename()) / BackUpDirName;
     // 创建这个备份文件夹
     boost::filesystem::create_directory(m_BackUpDirPath);

@@ -33,20 +33,30 @@
 *　　　　　　　　　　┗┻┛　┗┻┛+ + + +
 */
 
-void OnFileDownLoadComplete(bool bResult, const boost::filesystem::path& FilePath, boost::shared_ptr<AppFileHandle> pAppFileHandle)
+void OnFileDownLoadComplete(bool bResult, const boost::filesystem::path& FilePath, boost::shared_ptr<AppUpdate> pThis, boost::shared_ptr<AppFileHandle> pAppFileHandle)
 {
-	boost::filesystem::path DestPath = pAppFileHandle->GetCurrentPath() / FilePath.filename();
-	if (pAppFileHandle->Copy(FilePath, DestPath))
+	if (!bResult)
 	{
-		std::string ext = boost::filesystem::extension(FilePath);
-		if (std::string(".zip") ==  ext)
+		printf("下载失败，进行重传\n");
+		pThis->ResumeUpdate();
+	}
+	else
+	{
+		boost::filesystem::path DestPath = pAppFileHandle->GetCurrentPath() / FilePath.filename();
+		if (pAppFileHandle->Copy(FilePath, DestPath))
 		{
-			boost::filesystem::path p = DestPath.parent_path();
-			do_extract_zip(FilePath.string().c_str(), p.string().c_str());
-		}
-		else if (std::string(".gz") == ext)
-		{
-			do_extract_gz(FilePath.string().c_str());
+			std::string ext = boost::filesystem::extension(FilePath);
+			if (std::string(".zip") == ext)
+			{
+				boost::filesystem::path p = DestPath.parent_path();
+				// <todo> : 这个地方有点特殊。解压的时候目录是以 '\' '/' 作为分割的，所以这里如果不添加这个结束符。会造成解压的时候位置出错 
+				p += ".\\";
+				do_extract_zip(FilePath.string().c_str(), p.string().c_str());
+			}
+			else if (std::string(".gz") == ext)
+			{
+				do_extract_gz(FilePath.string().c_str());
+			}
 		}
 	}
 }
@@ -69,9 +79,9 @@ int main(int argc,char* argv[])
 		// 获取下载所有文件
 		std::vector<DownLoadFile> vecDownLoadFile = pAppVersion->GetDownLoadFileList();
 		std::for_each(vecDownLoadFile.begin(), vecDownLoadFile.end(), [pAppFileHandle, &io](const DownLoadFile& File){
-			boost::filesystem::path FilePath = pAppFileHandle->BackUpDirPath() / File.m_FileName;
+			boost::filesystem::path FilePath = pAppFileHandle->GetCurrentPath() / File.m_FileName;
 			boost::shared_ptr<AppUpdate> pAppUpdate(new AppUpdate(io, FilePath));
-			pAppUpdate->m_UpdateCompleteSig.connect(boost::bind(OnFileDownLoadComplete, _1, _2, pAppFileHandle));
+			pAppUpdate->m_UpdateCompleteSig.connect(boost::bind(OnFileDownLoadComplete, _1, _2, _3, pAppFileHandle));
 			pAppUpdate->StartUpdate(File.m_Url, File.m_MD5);
 		});
 	});
